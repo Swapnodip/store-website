@@ -27,10 +27,13 @@ const AdminPage = () => {
         </li>
         <li>List of coupon codes:
             <ul>
-                {data.codes.map(c=>(<li>{c}</li>))}
+                {data.codes.map((c,k)=>(<li key={k}>{c}</li>))}
             </ul>
         </li>
     </ul>
+    <button onClick={()=>{
+        axios.get("/admincode").then(axios.get("/admin").then((res) => setData(res.data)))
+    }}>Generate new coupon code</button>
   </div>);
 };
 

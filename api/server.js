@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 //data store
-const n = 5;
+const N = 2;  //Every Nth order gets a coupon code
 const items = [
   { name: "Smartphone", value: 15000 },
   { name: "Laptop", value: 60000 },
@@ -45,27 +45,41 @@ app.put("/remove", async (req, res) => {
 }); //route to remove an item from cart
 
 app.get("/code", async (req, res) => {
+  if ((order_count + 1) % N) {
+    res.send({ code: 0 });
+  } else {
+    let code = 0;
+    if (codes.length == 0) {
+      code = Math.floor(Math.random() * 1000000);
+      while (codes.includes(code)) {
+        code = Math.floor(Math.random() * 1000000);
+      }
+      codes.push(code);
+    } else {
+      code = codes[0];
+    }
+    res.send({ code });
+  }
+}); //route to get a new coupon code
+
+app.get("/admincode", async (req, res) => {
   let code = Math.floor(Math.random() * 1000000);
   while (codes.includes(code)) {
     code = Math.floor(Math.random() * 1000000);
   }
   codes.push(code);
-  res.send(code);
-}); //route to get a new coupon code
+  res.send({code});
+}); //route to force get a new coupon code
 
 app.put("/code", async (req, res) => {
-  let code = req.body;
+  let code = parseInt(req.body.code);
   if (codes.includes(code)) {
-    codes = codes.filter((c) => c != code);
+    codes = codes.filter(c => (c != code));
     res.send(true);
   } else {
     res.send(false);
   }
 }); //route to use a coupon code
-
-app.get("/ordercount", async (req, res) => {
-  res.send(order_count);
-}); //route to get count of orders
 
 app.put("/order", async (req, res) => {
   let order = req.body;
