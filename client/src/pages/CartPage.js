@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-
 const CartPage = (props) => {
   const [cart, setCart] = useState([]);
   useEffect(() => {
@@ -15,15 +14,19 @@ const CartPage = (props) => {
           <span>{i.value}&#8377;</span>
           <button
             onClick={() => {
-                axios.put("/remove", i).then(res=>{setCart(res.data)});
-                props.updateCount();
-              }}
+              axios.put("/remove", i).then((res) => {
+                setCart(res.data);
+              });
+              props.updateCount();
+            }}
           >
             Remove
           </button>
         </div>
       ))}
-      <h4>Total amount: {cart.reduce((partialSum, i) => partialSum + i.value, 0)}</h4>
+      <h3>
+        Total amount: {cart.reduce((partialSum, i) => partialSum + i.value, 0)}
+      </h3>
       <button>Check out</button>
     </div>
   );

@@ -29,8 +29,8 @@ app.get("/items", async (req, res) => {
 }); //route to get list of items
 
 app.put("/cart", async (req, res) => {
-  let item =req.body
-  item.id=Math.random()
+  let item = req.body;
+  item.id = Math.random();
   cart.push(item);
   res.send(cart);
 }); //route to add item to cart
@@ -80,6 +80,7 @@ app.put("/order", async (req, res) => {
     discount_amount +
     order.items.reduce((partialSum, i) => partialSum + i.value, 0) *
       (order.discount ? 0.1 : 0);
+  cart = [];
   res.send(true);
 }); //route to place order
 
