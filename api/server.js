@@ -10,10 +10,10 @@ app.use(cors());
 //data store
 const n = 5;
 const items = [
-  { name: "smartphone", value: 15000 },
-  { name: "laptop", value: 60000 },
-  { name: "tablet", value: 25000 },
-  { name: "smartwatch", value: 5000 },
+  { name: "Smartphone", value: 15000 },
+  { name: "Laptop", value: 60000 },
+  { name: "Tablet", value: 25000 },
+  { name: "Smartwatch", value: 5000 },
 ]; //list of items
 var cart = []; //contents of cart
 var orders = []; //list of orders
