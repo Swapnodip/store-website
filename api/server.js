@@ -29,13 +29,20 @@ app.get("/items", async (req, res) => {
 }); //route to get list of items
 
 app.put("/cart", async (req, res) => {
-  cart.push(req.body);
+  let item =req.body
+  item.id=Math.random()
+  cart.push(item);
   res.send(cart);
 }); //route to add item to cart
 
 app.get("/cart", async (req, res) => {
   res.send(cart);
 }); //route to get list of items in cart
+
+app.put("/remove", async (req, res) => {
+  cart = cart.filter((i) => i.id != req.body.id);
+  res.send(cart);
+}); //route to remove an item from cart
 
 app.get("/code", async (req, res) => {
   let code = Math.floor(Math.random() * 1000000);
@@ -85,7 +92,7 @@ app.get("/admin", async (req, res) => {
     sale_amount,
     discount_amount,
   };
-  res.send(result)
+  res.send(result);
 }); //route to get information for admin
 
 //end of routes
