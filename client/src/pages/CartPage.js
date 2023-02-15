@@ -15,6 +15,7 @@ const CartPage = (props) => {
           <strong>{i.name}</strong>
           <span>{i.value}&#8377;</span>
           <button
+            className="small_button"
             onClick={() => {
               axios.put("/remove", i).then((res) => {
                 setCart(res.data);
@@ -30,6 +31,7 @@ const CartPage = (props) => {
         Total amount: {cart.reduce((partialSum, i) => partialSum + i.value, 0)}
       </h3>
       <button
+        className="big_button"
         onClick={() => {
           navigate("/checkout");
         }}

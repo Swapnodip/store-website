@@ -16,18 +16,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Store</Link>
-            </li>
-            <li>
-              <Link to="/admin">Admin</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart:{cartCount}</Link>
-            </li>
-          </ul>
+        <nav className="navbar">
+          <Link to="/">Store</Link>
+          <Link to="/admin">Admin</Link>
+          <Link to="/cart">Cart: {cartCount}</Link>
         </nav>
         <Routes>
           <Route
@@ -54,7 +46,18 @@ function App() {
               ></CartPage>
             }
           />
-          <Route path="/checkout" element={<CheckOutPage></CheckOutPage>} />
+          <Route
+            path="/checkout"
+            element={
+              <CheckOutPage
+                updateCount={() => {
+                  axios
+                    .get("/cart")
+                    .then((res) => setCartCount(res.data.length));
+                }}
+              ></CheckOutPage>
+            }
+          />
           <Route path="/admin" element={<AdminPage></AdminPage>} />
           <Route path="/exit" element={<ExitPage></ExitPage>} />
         </Routes>

@@ -7,6 +7,7 @@ const ExitPage = () => {
     <div>
       <h2>Your order is confirmed</h2>
       <button
+        className="big_button"
         onClick={() => {
           navigate("/");
         }}

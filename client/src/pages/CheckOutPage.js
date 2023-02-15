@@ -27,6 +27,7 @@ const CheckOutPage = (props) => {
       <label>Enter coupon code here</label>
       <input id="code_input"></input>
       <button
+        className="small_button"
         onClick={() => {
           if (cart.length && !discount) {
             let inp = document.getElementById("code_input").value;
@@ -38,13 +39,15 @@ const CheckOutPage = (props) => {
       >
         Use code
       </button>
-      {discount && <p>Coupon code has been applied</p>}
-      {cart.length == 0 && <p>Cart is empty</p>}
+      {discount && <p className="coupon_alert">Coupon code has been applied</p>}
+      {cart.length == 0 && <p className="empty_alert">Cart is empty</p>}
       <h4>Are you sure you want to confirm your order?</h4>
       <button
+        className="big_button"
         onClick={() => {
           if (cart.length) {
             axios.put("/order", { items: cart, discount: discount });
+            props.updateCount();
             navigate("/exit");
           }
         }}
@@ -52,6 +55,7 @@ const CheckOutPage = (props) => {
         Confirm order
       </button>
       <button
+        className="big_button"
         onClick={() => {
           navigate("/cart");
         }}

@@ -16,7 +16,7 @@ const AdminPage = () => {
   //console.log(data);
   return (
     <div className="AdminPage">
-      <ul>
+      <ul className="data_list">
         <li>Total number of orders: {data.order_count}</li>
         <li>Total number of items sold: {data.sale_count}</li>
         <li>Total value of items sold: {data.sale_amount}</li>
@@ -39,6 +39,7 @@ const AdminPage = () => {
         </li>
       </ul>
       <button
+        className="small_button"
         onClick={() => {
           axios
             .get("/admincode")

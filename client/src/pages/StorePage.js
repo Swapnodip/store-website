@@ -10,21 +10,25 @@ const StorePage = (props) => {
   }, []);
   return (
     <div className="StorePage">
-      {items.map((i, k) => (
-        <div className="Item" key={k}>
-          <strong>{i.name}</strong>
-          <span>{i.value}&#8377;</span>
-          <button
-            onClick={() => {
-              axios.put("/cart", i);
-              props.updateCount();
-            }}
-          >
-            Add to Cart
-          </button>
-        </div>
-      ))}
+      <div className="store_list">
+        {items.map((i, k) => (
+          <div className="Item" key={k}>
+            <strong>{i.name}</strong>
+            <span>{i.value}&#8377;</span>
+            <button
+              className="small_button"
+              onClick={() => {
+                axios.put("/cart", i);
+                props.updateCount();
+              }}
+            >
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
       <button
+        className="big_button"
         onClick={() => {
           navigate("/checkout");
         }}
