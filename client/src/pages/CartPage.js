@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = (props) => {
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     axios.get("/cart").then((res) => setCart(res.data));
   }, []);
@@ -27,7 +29,13 @@ const CartPage = (props) => {
       <h3>
         Total amount: {cart.reduce((partialSum, i) => partialSum + i.value, 0)}
       </h3>
-      <button>Check out</button>
+      <button
+        onClick={() => {
+          navigate("/checkout");
+        }}
+      >
+        Check out
+      </button>
     </div>
   );
 };

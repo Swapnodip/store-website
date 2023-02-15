@@ -1,11 +1,20 @@
-import React from "react"
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-ExitPage = () => {
-    return(
-        <div>
-            
-        </div>
-    )
-}
+const ExitPage = () => {
+  const navigate = useNavigate();
+  return (
+    <div>
+      <h2>Your order is confirmed</h2>
+      <button
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        Return to store
+      </button>
+    </div>
+  );
+};
 
-export default ExitPage
+export default ExitPage;

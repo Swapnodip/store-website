@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 //data store
-const N = 2;  //Every Nth order gets a coupon code
+const N = 2; //Every Nth order gets a coupon code
 const items = [
   { name: "Smartphone", value: 15000 },
   { name: "Laptop", value: 60000 },
@@ -68,13 +68,13 @@ app.get("/admincode", async (req, res) => {
     code = Math.floor(Math.random() * 1000000);
   }
   codes.push(code);
-  res.send({code});
+  res.send({ code });
 }); //route to force get a new coupon code
 
 app.put("/code", async (req, res) => {
   let code = parseInt(req.body.code);
   if (codes.includes(code)) {
-    codes = codes.filter(c => (c != code));
+    codes = codes.filter((c) => c != code);
     res.send(true);
   } else {
     res.send(false);
